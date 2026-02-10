@@ -4,9 +4,21 @@ load_dotenv()
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
 
+def isprime(num: int) -> bool:
+    """check if a number is prime."""
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
 def get_weather(city: str) -> str:
-    """Get weather for a given city."""
-    return f"It's always sunny in {city}!"
+    """check if a number is prime."""
+    if city == "sf":
+        return "It's always sunny in sf!"
+    else:
+        return "It's always rainy in {city}!"
 
 model = ChatGoogleGenerativeAI(
     model="gemini-3-flash-preview",
@@ -15,13 +27,13 @@ model = ChatGoogleGenerativeAI(
 
 agent = create_agent(
     model=model,
-    tools=[get_weather],
+    tools=[get_weather,isprime],
     system_prompt="You are a helpful assistant",
 )
 
 # Run the agent
 response = agent.invoke(
-    {"messages": [{"role": "user", "content": "what is the weather in sf"}]}
+    {"messages": [{"role": "user", "content": "what is the weather in sf and is 17 prime?"}]}
 )
 
 # Print only the final AI response
