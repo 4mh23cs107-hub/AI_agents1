@@ -1,10 +1,10 @@
 import smtplib
-from secrets import sender, receiver, password
 from email.mime.text import MIMEText
+from secrets import sender_email, receiver_email, password
 
-sender = "4mh23cs107@gmail.com"
-receiver = "sanikamj5@gmail.com"
-password = "lyku gmiz ehhn geed"
+sender = sender_email
+receiver = receiver_email
+password = password
 
 subject = "Hello from Python"
 body = "This is a test email sent using Python."
